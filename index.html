@@ -15,6 +15,18 @@ h1 {
 	color: #545454;
 	padding: 12px;
 }
+
+.footer {
+	position:fixed;
+	left:0;
+	bottom:0;
+	width:100%;
+	padding:5px;
+	height:25px;
+	background-color:#ff6060;
+	color:black;
+	text-align:center;
+}
 </style>
 
 
@@ -22,6 +34,8 @@ h1 {
 
 <body>
 <h1 style="border:3px; border-style:solid; border-color:black; max-width:15em; align:center; margin:auto;" align=center color=grey>Ghost Hunter</h1>
+<!--Adding a manual save button since I'm a fuck up-->
+<button onclick="manualSave()" id="saveGame">Save Game</button>
 
 <h3 id="totalCash">You've got: $0</h3>
 
@@ -41,14 +55,15 @@ h1 {
 <!--                                                -->
 <!--THIS IS WHERE THE MONKEYS CAN PURCHASE UPGRADES.-->
 <!--                                                -->
-<div style="float:left;border:3px; border-style:dotted;width:40em;padding-left:10px;padding-right:10px;padding-top:20px;padding-bottom:20px"><h2 style="text-align:center">Spirit Store</h2>
-<h4 style="text-align:center">Spend accumulated spirits for upgrades to catch more, you sicko.</h4>
+<div style="float:left;border:3px; border-style:dotted;width:40em;padding-left:10px;padding-right:10px;padding-top:20px;padding-bottom:20px">
+	<h2 style="text-align:center">Spirit Store</h2>
+	<h4 style="text-align:center">Spend accumulated spirits for upgrades to catch more, you sicko.</h4>
 
 
-<button onclick="upgradeVacuum()" id="minorSpiritPerClickUpgrade" style="width:200px;">Use some minor spirit to upgrade your Polturgust 3000
-Cost: 10 Minor Spirits</button>
-
-
+	<div id="spiritStoreScroll" style="max-height:500px;height:200px; max-width:800px;overflow:auto;">
+		<button onclick="upgradeVacuum();" id="minorSpiritPerClickUpgrade" style="width:300px;">Use some minor spirit to upgrade your Polturgust 3000 Cost: 10 Minor Spirits</button>
+		<h4 id="vacuumLevel" style="display:inline-block">Current level: 0</h5>
+	</div>
 </div>
 
 <!--THIS IS THE MONEY STORE, WHERE YOU CAN SPEND MONEY. JESUS.-->
@@ -57,8 +72,16 @@ Cost: 10 Minor Spirits</button>
 <h4 style="text-align:center">Purchase things with a more meaningful currency, without tormenting souls. Somewhat.</h4>
 
 <!--FIRST AVAILABLE UPGRADE-->
-<button onclick="firstUpgrade()" id="shpFirst">Leave your Vacuum on. Slowly use up cash to catch minor spirits Cost: $25</button>
+<button onclick="firstUpgrade()" id="shpFirst" style="width:300px;">Leave your Vacuum on. Slowly use up cash to catch minor spirits Cost: $25</button>
+</div>
 
 <script src="main.js"></script>
+
+<button style="display:inline-block" onclick="deleteSave()" id="deleteSaveGame">Delete Save</button>
+<div class="footer">
+	<a href="https://twitter.com/inefficientRat" style="color:white">Twitter</a> | <a href="https://www.patreon.com/inefficientRodent" style="color:white">Patreon</a> | <a href="https://www.youtube.com/channel/UCcZ3Q-vh5B4KRjzANgPrzwA?view_as=subscriber" style="color:white">Youtube</a>
+	<br>
+	Version #1.2
+</div>
 </body>
 </html>
