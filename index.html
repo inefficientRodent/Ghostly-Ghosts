@@ -24,22 +24,40 @@ h1 {
 <h1 style="border:3px; border-style:solid; border-color:black; max-width:15em; align:center; margin:auto;" align=center color=grey>Ghost Hunter</h1>
 
 <h3 id="totalCash">You've got: $0</h3>
+
+<!-- WHERE YOU SELL YOUR MINOR SPIRITS -->
 <h3 id="totalMinor">Total wailing minor spirits: 0
 </h3>
-<button onclick="sellMinorSpiritx1" id="sellMinorSpirit">Sell minor spirit for cash ($0.5)</button>
+<button onclick="sellMinorSpiritx1()" id="sellMinorSpirit">Sell minor spirit for cash ($0.5)</button>
+<button onclick="sellMinorSpiritx10()" id="sellMoreMinorSpirit" style="display:none;">x10 ($5)</button>
 
 
 
-
+<!--SO THE PLAYER CAN GO FIND GHOSTS-->
 <h4 style="border:1px; border-style:solid; border-color:black; max-width:10em;padding:5px;">Investigate a small haunting:
 <button onclick="smallSpirit()">Investigate</button>
 </h4>
 
-<h2 style="border:3px; border-style:dotted;max-width:5em; text-align:center;padding-left:10px;padding-right:10px;padding-top:20px;padding-bottom:20px">Store
+<!--                                                -->
+<!--THIS IS WHERE THE MONKEYS CAN PURCHASE UPGRADES.-->
+<!--                                                -->
+<div style="float:left;border:3px; border-style:dotted;width:40em;padding-left:10px;padding-right:10px;padding-top:20px;padding-bottom:20px"><h2 style="text-align:center">Spirit Store</h2>
+<h4 style="text-align:center">Spend accumulated spirits for upgrades to catch more, you sicko.</h4>
 
-<button onclick="buyVacuum()" id="minorSpiritPerClickUpgrade">Upgrade ghost catching equipment
+
+<button onclick="upgradeVacuum()" id="minorSpiritPerClickUpgrade" style="width:200px;">Use some minor spirit to upgrade your Polturgust 3000
 Cost: 10 Minor Spirits</button>
-</h2>
+
+
+</div>
+
+<!--THIS IS THE MONEY STORE, WHERE YOU CAN SPEND MONEY. JESUS.-->
+<div style="float:left;border:3px;border-style:dotted;width:40em;padding-left:10px;padding-right:10px;padding-top:20px;padding-bottom:20px;margin-left:20px;">
+<h2 style="text-align:center">Cash Store</h2>
+<h4 style="text-align:center">Purchase things with a more meaningful currency, without tormenting souls. Somewhat.</h4>
+
+<!--FIRST AVAILABLE UPGRADE-->
+<button onclick="firstUpgrade()" id="shpFirst">Leave your Vacuum on. Slowly use up cash to catch minor spirits Cost: $25</button>
 
 <script src="main.js"></script>
 </body>
