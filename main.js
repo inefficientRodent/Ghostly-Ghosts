@@ -2,12 +2,12 @@
 //DON'T BE A FUCKIN DUNDER HEAD AND TRY AND CONSTANTLY ROUND VALUES
 //ONLY ROUND THE VALUES DURING THE DISPLAY PART OF THE WHOLE SHTICK
 //OR ELSE YOU'LL JUST BE WASTING YOUR FUCKING TIME
-
 var gameData = {
 	minorSpirit: 0,
 	mSpiritPerClick: 1,
 	vacuumUpgradeCost: 10,
 	vacuumLevel: 0,
+	vacuumPerSecond: 0,
 	pricePerMinorSpirit: 0.5,
 	
 	apparition: 0,
@@ -16,6 +16,7 @@ var gameData = {
 	ghost: 0,
 	
 	cash: 0,
+	
 		
 	//FOLLOWING VARIABLES ARE FOR "ALL TIME" STAT
 	ATcash: 0,
@@ -24,6 +25,15 @@ var gameData = {
 	ATghost: 0
 }
 
+//Function to open options menu 
+function options() {
+	document.getElementById("optionsMenBG").style.display = "block";
+	document.getElementById("optionsMenFG").style.display = "block";
+}
+function closeOpts() {
+	document.getElementById("optionsMenBG").style.display = "none";
+	document.getElementById("optionsMenFG").style.display = "none";
+}
 
 function smallSpirit() {
 	gameData.minorSpirit = gameData.minorSpirit + gameData.mSpiritPerClick
@@ -56,10 +66,10 @@ function upgradeVacuum() {
 		gameData.minorSpirit = gameData.minorSpirit - gameData.vacuumUpgradeCost
 		
 		//Calc for getting new minor spirit per click
-		gameData.mSpiritPerClick = gameData.mSpiritPerClick + 0.5
+		gameData.mSpiritPerClick = gameData.mSpiritPerClick + 0.1
 		
 		//Calc for increasing the cost of vacuum upgrade
-		gameData.vacuumUpgradeCost = gameData.vacuumUpgradeCost * 1.25
+		gameData.vacuumUpgradeCost = gameData.vacuumUpgradeCost * 1.2
 		
 		//Increment Vacuum level
 		gameData.vacuumLevel += 1
@@ -74,27 +84,39 @@ function upgradeVacuum() {
 
 
 //HERE'S WHERE THE CODE GETS KINDA SHIFTY AND I DISLIKE IT
-//PS. FUTURE ME.
-// SERIOUSLY
-// PS FUCKING FUTURE ME
-// COME BACK AND WORK ON THIS.
-// SERIOUS FUCKING LY.
+// PAST ME LEFT A REAL GOOD MESSAGE HERE. LOVE, FUTURE-PAST MAX.
 function firstUpgrade() {
 	if (gameData.cash >= 25) {
 		document.getElementById("shpFirst").disabled = true;
-		
+		gameData.cash = gameData.cash - 25;
+		document.getElementById("totalCash").innerHTML = " You've got: $" + gameData.cash
+		gameData.vacuumPerSecond = 0.5
 	}
 }
 
 
 //Technical game bullshit
+
+//This first one runs every second, good for per second stuff. Duh.
 var mainGameLoop = window.setInterval(function() {
-	//IF MINOR SPIRIT IS ABOVE 10, THEN ELEMENT WILL BE SHOWN, TADAA.
+	//IF ALL TIME MINOR SPIRIT IS ABOVE 10, THEN ELEMENT WILL BE SHOWN, TADAA.
 	if (gameData.ATminorspirit >= 10) {
 		document.getElementById("sellMoreMinorSpirit").style.display = "inline-block";
 	}
+	//REPEATING CALC FOR VACUUM UPGRADE
+	if (gameData.vacuumPerSecond > 0 && gameData.vacuumLevel > 0 && gameData.cash >0) {
+		gameData.minorSpirit = gameData.minorSpirit + (gameData.vacuumPerSecond * gameData.vacuumLevel);
+		gameData.ATminorspirit = gameData.ATminorspirit + ((gameData.vacuumPerSecond * gameData.vacuumLevel)-1);
+		gameData.cash = (gameData.cash - 0.25)
+	}
+	
 	
 }, 1000)
+
+var updateLoop = window.setInterval(function() {
+	document.getElementById("totalMinor").innerHTML = "Total wailing minor spirits: " + (Math.round(gameData.minorSpirit * 100) / 100)
+	document.getElementById("totalCash").innerHTML = " You've got: $" + gameData.cash
+}, 500)
 
 var saveGameLoop = window.setInterval(function() {
 	localStorage.setItem('ghostlyGhoulsSave', JSON.stringify(gameData))
@@ -104,7 +126,15 @@ function manualSave() {
 	localStorage.setItem('ghostlyGhoulsSave', JSON.stringify(gameData))
 }
 
+function nevermind() {
+	document.getElementById('forREAL').style.display = "none";
+}
+
 function deleteSave() {
+	document.getElementById('forREAL').style.display = "block";
+}
+
+function deleteSaveForREAL() {
 	localStorage.removeItem('ghostlyGhoulsSave')
 	//Renewing variables to base numbers and also the displays. There has GOT to be an easier way to do this but oh fucking well.
 	gameData.minorSpirit= 0,
@@ -129,6 +159,7 @@ function deleteSave() {
 	//Display resets
 	document.getElementById("shpFirst").disabled = false;
 	document.getElementById("sellMoreMinorSpirit").style.display = "none";
+	document.getElementById("totalCash").innerHTML = " You've got: $" + gameData.cash
 	document.getElementById("totalMinor").innerHTML = "Total wailing minor spirits: " + (Math.round(gameData.minorSpirit * 100) / 100)
 	document.getElementById("minorSpiritPerClickUpgrade").innerHTML = "Use some minor spirit to upgrade your Polturgust 3000 Cost: " + (Math.round(gameData.vacuumUpgradeCost * 100) / 100) + " Minor Spirits"
 	document.getElementById("vacuumLevel").innerHTML = "Current level: " + gameData.vacuumLevel

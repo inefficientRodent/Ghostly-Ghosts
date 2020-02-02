@@ -4,38 +4,25 @@
 <title>Ghostly Ghouls</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body {
-	font-family: Garamond;
-	background: #D8D8D8;
-}
-
-h1 {
-	font-size: 50px;
-	color: #545454;
-	padding: 12px;
-}
-
-.footer {
-	position:fixed;
-	left:0;
-	bottom:0;
-	width:100%;
-	padding:5px;
-	height:25px;
-	background-color:#ff6060;
-	color:black;
-	text-align:center;
-}
-</style>
-
+<link rel="stylesheet" type="text/css" href="Ghostly.css">
 
 </head>
 
 <body>
+
+<div id="optionsMenBG" class="optMenBG">
+
+</div>
+
+
 <h1 style="border:3px; border-style:solid; border-color:black; max-width:15em; align:center; margin:auto;" align=center color=grey>Ghost Hunter</h1>
 <!--Adding a manual save button since I'm a fuck up-->
-<button onclick="manualSave()" id="saveGame">Save Game</button>
+<button onclick="options()" id="optionMenu">Options</button>
+
+
+
+
+
 
 <h3 id="totalCash">You've got: $0</h3>
 
@@ -48,14 +35,14 @@ h1 {
 
 
 <!--SO THE PLAYER CAN GO FIND GHOSTS-->
-<h4 style="border:1px; border-style:solid; border-color:black; max-width:10em;padding:5px;">Investigate a small haunting:
+<h4 class="boxWhy">Investigate a small haunting:
 <button onclick="smallSpirit()">Investigate</button>
 </h4>
 
 <!--                                                -->
 <!--THIS IS WHERE THE MONKEYS CAN PURCHASE UPGRADES.-->
 <!--                                                -->
-<div style="float:left;border:3px; border-style:dotted;width:40em;padding-left:10px;padding-right:10px;padding-top:20px;padding-bottom:20px">
+<div class="storeMenu1">
 	<h2 style="text-align:center">Spirit Store</h2>
 	<h4 style="text-align:center">Spend accumulated spirits for upgrades to catch more, you sicko.</h4>
 
@@ -67,21 +54,39 @@ h1 {
 </div>
 
 <!--THIS IS THE MONEY STORE, WHERE YOU CAN SPEND MONEY. JESUS.-->
-<div style="float:left;border:3px;border-style:dotted;width:40em;padding-left:10px;padding-right:10px;padding-top:20px;padding-bottom:20px;margin-left:20px;">
+<div class="storeMenu2">
 <h2 style="text-align:center">Cash Store</h2>
 <h4 style="text-align:center">Purchase things with a more meaningful currency, without tormenting souls. Somewhat.</h4>
 
 <!--FIRST AVAILABLE UPGRADE-->
 <button onclick="firstUpgrade()" id="shpFirst" style="width:300px;">Leave your Vacuum on. Slowly use up cash to catch minor spirits Cost: $25</button>
+<p>You see a note attached that says "Vacuum must be level 1" but don't understand what it means.</p>
 </div>
+
 
 <script src="main.js"></script>
 
-<button style="display:inline-block" onclick="deleteSave()" id="deleteSaveGame">Delete Save</button>
+<!--Plugging myself 8)-->
 <div class="footer">
 	<a href="https://twitter.com/inefficientRat" style="color:white">Twitter</a> | <a href="https://www.patreon.com/inefficientRodent" style="color:white">Patreon</a> | <a href="https://www.youtube.com/channel/UCcZ3Q-vh5B4KRjzANgPrzwA?view_as=subscriber" style="color:white">Youtube</a>
 	<br>
-	Version #1.2
+	Version 1.3
 </div>
+
+<div id="optionsMenFG" class="optMenBox">
+	<div id="menOpt" class="menOptions">
+		<button onclick="closeOpts()" class="closeMenu">[x]</button>
+		Save your game: <button onclick="manualSave()" id="saveGame">Save Game</button><br>
+		<text style="color:red">Delete your game:</text><button onclick="deleteSave()" id="deleteSaveGame">Delete Save</button>
+		
+		<div id="forREAL" class="seriously">Are you 100% sure?
+			<button onclick="deleteSaveForREAL()">Yes</button>
+			<button onclick="nevermind()">No</button>
+		</div>
+	</div>
+</div>
+
+
+
 </body>
 </html>
